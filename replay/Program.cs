@@ -59,6 +59,7 @@ byte[] decompressedData = new byte[20000000]; // 20MB
 //decompressedData[0] = (byte)ms.ReadByte();
 //decompressedData[1] = (byte)ms.ReadByte();
 using var dfs = new DeflateStream(ms, CompressionMode.Decompress);
+using var packetsBinReader = new BinaryReader(dfs);
 //int decompressedLength = 0;
 
 /*for (;; decompressedLength++)
@@ -70,6 +71,26 @@ using var dfs = new DeflateStream(ms, CompressionMode.Decompress);
     }
     decompressedData[decompressedLength] = (byte)j;
 }*/
-using var outDecompressedFile = File.Open("decompressed data.hex", FileMode.OpenOrCreate);
-dfs.CopyTo(outDecompressedFile, 20000000);
+/*using var outDecompressedFile = File.Open("decompressed data.hex", FileMode.OpenOrCreate);
+dfs.CopyTo(outDecompressedFile, 20000000);*/
 //outDecompressedFile.Write(decompressedData, 0, decompressedLength);
+bool notEnd = true;
+int packetCount = 0;
+while (notEnd)
+{
+    try
+    {
+        var packetSize = packetsBinReader.ReadInt32();
+        var packetType = packetsBinReader.ReadInt32();
+        var packetTime = packetsBinReader.ReadSingle();
+        var packetData = packetsBinReader.ReadBytes(packetSize);
+        packetCount++;
+        //Console.WriteLine($"[{packetTime}] packet with size {packetSize} of type {packetType}");
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine($"end of stream");
+        notEnd = false;
+    }
+}
+Console.WriteLine($"{packetCount} packets detected");
