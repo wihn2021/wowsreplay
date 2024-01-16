@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "replay", "replay\replay.csproj", "{ED2F93CE-34E0-41FA-B2F0-DB74CCFD1B3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED2F93CE-34E0-41FA-B2F0-DB74CCFD1B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED2F93CE-34E0-41FA-B2F0-DB74CCFD1B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED2F93CE-34E0-41FA-B2F0-DB74CCFD1B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED2F93CE-34E0-41FA-B2F0-DB74CCFD1B3A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
