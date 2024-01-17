@@ -3,10 +3,10 @@
 using System.IO.Compression;
 using System.Text;
 using CryptSharp.Utility;
-using Newtonsoft.Json.Linq;
 
 Console.WriteLine("Hello, World!");
 var filePath = @"C:\users\86198\Desktop\lex.wowsreplay";
+var startTime = DateTime.Now;
 if (!File.Exists(filePath))
 {
     Console.WriteLine("no such file");
@@ -20,10 +20,12 @@ Console.WriteLine("magic is 0x{0:X}", magic);
 var blockCount = reader.ReadInt32();
 var blockSize = reader.ReadInt32();
 var engineData = System.Text.Encoding.UTF8.GetString(reader.ReadBytes(blockSize));
+/*
 JObject engineDataJson = JObject.Parse(engineData);
 JArray? vehicles = (JArray)engineDataJson["vehicles"]!;
+*/
 // Console.WriteLine(vehicles);
-Console.WriteLine($"block count = {blockCount}, block size = {blockSize}, engine data = {engineData}");
+Console.WriteLine($"block count = {blockCount}, block size = {blockSize}");
 for (int i = 1; i < blockCount; i++)
 {
     var dataLength = reader.ReadInt32();
@@ -94,3 +96,6 @@ while (notEnd)
     }
 }
 Console.WriteLine($"{packetCount} packets detected");
+var endTime = DateTime.Now;
+Console.WriteLine($"use time {endTime - startTime}");
+Console.ReadKey();
